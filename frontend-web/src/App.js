@@ -9,7 +9,8 @@ import MovieDetailPage from './pages/MovieDetailPage';
 import AddMoviePage from './pages/AddMoviePage';
 import UpdateMoviePage from './pages/UpdateMoviePage';
 import BackToTopButton from './components/BackToTopButton';
-import AdPopup from './components/AdPopup'; // << IMPORT COMPONENT AdPopup MỚI
+import ContactPage from './pages/ContactPage';
+import AdPopup from './components/AdPopup'; 
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -55,8 +56,8 @@ function App() {
 
   return (
     <div className="App">
+  
       <header className="App-header">
-        {/* ... (Nội dung header giữ nguyên) ... */}
         <div className="header-left">
           <div className="logo" onClick={handleLogoClick}>
             <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>LOGO</Link>
@@ -69,19 +70,25 @@ function App() {
           </div>
           <nav className="main-nav">
             <ul>
-              {isAuthenticated ? (
+              {!isAuthenticated && (
+                <>
+                  <li>
+                    <Link to="/contact" style={{ color: '#28a745', textDecoration: 'underline', marginRight: 10 }}>
+                      Contact
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/login" className="login-signup-button">Login/Sign up</Link>
+                  </li>
+                </>
+              )}
+              {isAuthenticated && (
                 <>
                   {isAdmin && (
-                      <>
-                          <li><Link to="/add-movie">Add Movie</Link></li>
-                      </>
+                    <li><Link to="/add-movie">Add Movie</Link></li>
                   )}
                   <li><span style={{ color: '#ccc', cursor: 'default' }}>Welcome, {user.name}</span></li>
                   <li><button onClick={handleLogout} className="nav-button">Logout</button></li>
-                </>
-              ) : (
-                <>
-                  <li><Link to="/login" className="login-signup-button">Login/Sign up</Link></li>
                 </>
               )}
             </ul>
@@ -128,6 +135,7 @@ function App() {
           <Route path="/movies/:id" element={<MovieDetailPage />} />
           <Route path="/add-movie" element={<AddMoviePage />} />
           <Route path="/update-movie/:movieId" element={<UpdateMoviePage />} />
+          <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </main>
       

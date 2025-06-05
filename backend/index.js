@@ -10,6 +10,7 @@ const authRouter = require('./routers/authRouter');
 const ratingRouter = require('./routers/rateRouter');
 const commentRouter = require('./routers/commentRouter'); 
 const movieRouter = require('./routers/movieRouter');
+const contactRouter = require('./routers/contactRouter'); // Ensure this is imported
 
 const app = express();
 
@@ -30,9 +31,10 @@ mongoose.connect(process.env.MONGO_URI)
 });
 
 app.use('/api/auth', authRouter);
-app.use('/api/ratings', ratingRouter); // <-- THAY ĐỔI DÒNG NÀY
-app.use('/api/comments', commentRouter); // <-- THAY ĐỔI DÒNG NÀY
+app.use('/api/ratings', ratingRouter);
+app.use('/api/comments', commentRouter);
 app.use('/api/movies', movieRouter);
+app.use('/api/contacts', contactRouter); // ADDED: Mount the contact router here
 
 app.get('/', (req, res) => {
   res.json({ message: 'Hello, World!' });
