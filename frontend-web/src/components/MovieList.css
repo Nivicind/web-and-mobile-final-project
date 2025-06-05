@@ -1,120 +1,111 @@
-/* Container cho toàn bộ danh sách phim */
 .movie-list-container {
   padding: 20px;
   margin: 20px auto;
-  max-width: 1000px; /* Giảm max-width cho list view để gọn hơn */
-  background-color: #282c34; /* Giữ màu nền tối */
+  max-width: 1000px;
+  background-color: #282c34;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  color: white; /* Giữ màu chữ trắng */
+  color: white;
 }
 
 .movie-list-container h2 {
-  color: white; /* Giữ màu chữ trắng */
-  /* margin-bottom: 20px; /* Bỏ margin ở đây để div cha của h2 và sorting-controls xử lý */
+  color: white;
 }
 
-/* Styles cho danh sách phim dạng list */
 .movie-list {
   display: flex;
-  flex-direction: column; /* Xếp các item theo chiều dọc */
-  gap: 15px; /* Khoảng cách giữa các item trong list */
+  flex-direction: column;
+  gap: 15px;
 }
 
-/* Styles cho từng item phim trong danh sách */
 .movie-list-item-link {
-  text-decoration: none; /* Bỏ gạch chân cho link */
-  color: inherit; /* Kế thừa màu chữ */
+  text-decoration: none;
+  color: inherit;
 }
 
 .movie-list-item {
-  background-color: #333; /* Màu nền cho mỗi item */
+  background-color: #333;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   padding: 15px;
-  display: flex; /* Sử dụng flexbox để sắp xếp poster và thông tin */
-  align-items: center; /* Căn giữa các item theo chiều dọc */
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Hiệu ứng hover */
-  position: relative; /* Cho phép sử dụng z-index nếu cần */
-  overflow: hidden; /* Đảm bảo nội dung không tràn ra ngoài */
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  position: relative;
+  overflow: hidden;
 }
 
 .movie-list-item:hover {
-  transform: translateY(-3px); /* Hiệu ứng nâng nhẹ khi hover */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Hiệu ứng bóng đổ đậm hơn khi hover */
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Styles cho ảnh poster trong list view */
 .movie-poster-wrapper {
-  flex-shrink: 0; /* Ngăn poster co lại */
-  width: 90px; /* Chiều rộng cố định cho poster */
-  height: 120px; /* Chiều cao cố định cho poster */
-  margin-right: 20px; /* Khoảng cách giữa poster và thông tin */
+  flex-shrink: 0;
+  width: 90px;
+  height: 120px;
+  margin-right: 20px;
   border-radius: 4px;
-  overflow: hidden; /* Cắt bỏ phần thừa của ảnh */
+  overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .movie-poster-list {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Đảm bảo ảnh bao phủ toàn bộ vùng */
-  display: block; /* Loại bỏ khoảng trắng dưới ảnh */
+  object-fit: cover;
+  display: block;
 }
 
-/* Styles cho phần thông tin văn bản */
 .movie-info-list {
-  flex-grow: 1; /* Cho phép phần thông tin mở rộng */
-  text-align: left; /* Căn lề trái cho text */
+  flex-grow: 1;
+  text-align: left;
 }
 
 .movie-info-list h3 {
-  color: #00aaff; /* Màu xanh sáng cho tiêu đề phim */
+  color: #00aaff;
   margin-top: 0;
-  margin-bottom: 8px; /* Khoảng cách dưới tiêu đề */
-  font-size: 1.4em; /* Kích thước font lớn hơn một chút */
+  margin-bottom: 8px;
+  font-size: 1.4em;
   line-height: 1.2;
 }
 
 .movie-info-list p {
-  color: #ccc; /* Màu chữ xám nhạt cho thông tin */
+  color: #ccc;
   font-size: 0.9em;
-  margin-bottom: 5px; /* Khoảng cách giữa các dòng thông tin */
+  margin-bottom: 5px;
   line-height: 1.4;
 }
 
 .movie-info-list strong {
-  color: white; /* Màu trắng cho các label in đậm */
+  color: white;
 }
 
 
-/* --- STYLES MỚI CHO ĐIỀU KHIỂN SẮP XẾP --- */
-.sorting-controls-container { /* Class cho div cha của các select */
+.sorting-controls-container {
   display: flex;
-  gap: 15px; /* Khoảng cách giữa "Sort By" và "Order" group */
-  align-items: center; /* Căn chỉnh các label và select theo chiều dọc */
+  gap: 15px;
+  align-items: center;
 }
 
 .sort-label {
   margin-right: 5px;
-  color: #ccc; /* Màu chữ xám nhạt cho label */
+  color: #ccc;
   font-size: 0.9em;
 }
 
 .sort-select {
-  padding: 8px 12px; /* Kích thước padding tương tự các input khác */
-  border-radius: 5px; /* Bo góc tương tự các input khác */
-  border: 1px solid #444; /* Border tương tự các input khác */
-  background-color: #333; /* Nền đậm tương tự các input khác */
-  color: white; /* Chữ trắng */
-  font-size: 0.9em; /* Kích thước font tương tự các input khác */
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: 1px solid #444;
+  background-color: #333;
+  color: white;
+  font-size: 0.9em;
   cursor: pointer;
 }
 
-/* --- HẾT STYLES MỚI --- */
 
 
-/* Responsive adjustments for MovieList */
 @media (max-width: 800px) {
   .movie-list-container {
     padding: 15px;
@@ -153,20 +144,19 @@
     font-size: 0.8em; 
   }
 
-  /* Điều chỉnh cho sorting controls trên mobile nếu cần */
   .sorting-controls-container {
-    flex-direction: column; /* Xếp chồng trên mobile */
-    align-items: flex-end; /* Căn phải */
-    gap: 8px; /* Giảm khoảng cách */
-    width: 100%; /* Có thể cho chiếm toàn bộ nếu div cha của h2 và nó không có display:flex */
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    width: 100%;
   }
-  .sorting-controls-container > div { /* Mỗi cặp label-select */
+  .sorting-controls-container > div {
     display: flex;
     align-items: center;
-    width: auto; /* Để nó co lại theo nội dung */
+    width: auto;
   }
   .sort-select {
-    padding: 6px 10px; /* Giảm padding cho select trên mobile */
+    padding: 6px 10px;
     font-size: 0.85em;
   }
   .sort-label {

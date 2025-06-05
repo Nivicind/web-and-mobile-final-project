@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useAuth } from '../context/AuthContext'; // Để lấy token và kiểm tra quyền admin
+import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import '../App.css'; // Để dùng các CSS chung
+import '../App.css';
 
 function AddMoviePage() {
-  const { isAuthenticated, isAdmin, token } = useAuth(); // Lấy thông tin xác thực và vai trò
+  const { isAuthenticated, isAdmin, token } = useAuth();
   const navigate = useNavigate();
 
-  // State cho các trường của form phim
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [releaseDate, setReleaseDate] = useState('');
   const [genre, setGenre] = useState('');
   const [director, setDirector] = useState('');
-  const [cast, setCast] = useState(''); // Sẽ xử lý thành mảng sau
+  const [cast, setCast] = useState('');
   const [posterUrl, setPosterUrl] = useState('');
   const [trailerUrl, setTrailerUrl] = useState('');
   
@@ -22,12 +21,9 @@ function AddMoviePage() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
-  // Chuyển hướng nếu không phải admin hoặc chưa đăng nhập
   if (!isAuthenticated || !isAdmin) {
-    // Có thể chuyển hướng đến trang 403 Forbidden hoặc trang chủ
-    // Tùy theo yêu cầu của bạn, hiện tại tôi sẽ chuyển hướng về trang chủ
-    if (!loading) { // Chỉ chuyển hướng nếu không đang tải
-      setTimeout(() => { // Dùng setTimeout để tránh warning khi render
+    if (!loading) {
+      setTimeout(() => {
         navigate('/');
       }, 0);
     }
@@ -52,28 +48,24 @@ function AddMoviePage() {
         releaseDate,
         genre,
         director,
-        cast: cast.split(',').map(item => item.trim()), // Chuyển chuỗi cast thành mảng
+        cast: cast.split(',').map(item => item.trim()),
         posterUrl,
         trailerUrl,
       };
 
-      // Gửi yêu cầu POST đến API thêm phim của backend
-      // API movieRouter.js có movieRouter.post('/', ...)
-      // Trong index.js, nó được mount tại app.use('/api/movies', movieRouter);
-      // Vậy API đầy đủ sẽ là http://localhost:8000/api/movies
       const response = await axios.post(
         'http://localhost:8000/api/movies',
         movieData,
         {
           headers: {
-            Authorization: `Bearer ${token}`, // Gửi token xác thực (cần quyền admin)
+            Authorization: `Bearer ${token}`,
           },
         }
       );
 
       setSuccess(response.data.message || 'Movie added successfully!');
       console.log('Movie added:', response.data);
-      // Xóa form sau khi thêm thành công
+
       setTitle('');
       setDescription('');
       setReleaseDate('');
@@ -94,7 +86,7 @@ function AddMoviePage() {
   return (
     <div className="container">
       <h2>Add New Movie (Admin Only)</h2>
-      <form className="auth-form" onSubmit={handleSubmit}> {/* Dùng lại auth-form CSS */}
+      <form className="auth-form" onSubmit={handleSubmit}>
         {error && <p className="error-message">{error}</p>}
         {success && <p className="success-message">{success}</p>}
 

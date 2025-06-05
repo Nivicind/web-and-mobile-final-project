@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import '../App.css';
 
 function RegisterPage() {
-  // Đổi 'username' thành 'name' để khớp với backend
   const [name, setName] = useState(''); 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -26,12 +25,11 @@ function RegisterPage() {
     }
 
     try {
-      // Cập nhật URL API từ '/register' thành '/signup'
       const response = await axios.post('http://localhost:8000/api/auth/signup', {
-        name, // Gửi trường 'name' thay vì 'username'
+        name,
         email,
         password,
-        role: 'user', // Thêm trường 'role' với giá trị mặc định là 'user'
+        role: 'user',
       });
 
       setSuccess(response.data.message || 'Registration successful! Redirecting to login...');
@@ -55,7 +53,6 @@ function RegisterPage() {
         {success && <p className="success-message">{success}</p>}
 
         <div className="form-group">
-          {/* Đổi label và input để khớp với 'name' */}
           <label htmlFor="name">Name:</label> 
           <input
             type="text"

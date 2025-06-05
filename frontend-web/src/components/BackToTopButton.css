@@ -31,14 +31,14 @@
 }
 
 .back-to-top-button:hover {
-  background-color: #0056b3; /* Màu nền khi hover, tương tự nút Search */
+  background-color: #0056b3;
 }
 
 .back-to-top-button:active {
   background-color: #004085;
 }
 
-/* Responsive cho màn hình nhỏ hơn nếu cần */
+
 @media (max-width: 768px) {
   .back-to-top-container {
     bottom: 20px;

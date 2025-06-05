@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Routes, Route, Link, useNavigate } from 'react-router-dom';
-import { useAuth } from './context/AuthContext'; // [cite: 1]
+import { useAuth } from './context/AuthContext';
 import './App.css';
 import MovieList from './components/MovieList';
 import LoginPage from './pages/LoginPage';
@@ -140,7 +140,7 @@ function App() {
       </main>
       
       <BackToTopButton />
-      <AdPopup /> {/* << THÊM COMPONENT AdPopup VÀO ĐÂY */}
+      <AdPopup />
     </div>
   );
 }

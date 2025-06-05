@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import './MovieList.css'; // Đảm bảo import tệp CSS này
+import './MovieList.css';
 
 function MovieList({ searchKeyword }) {
   const [movies, setMovies] = useState([]);
@@ -15,7 +15,6 @@ function MovieList({ searchKeyword }) {
     const fetchMovies = async () => {
       setLoading(true);
       setError(null);
-      // console.log(`Frontend: Fetching movies. Search: '${searchKeyword}', SortBy: '${sortBy}', SortOrder: '${sortOrder}'`);
 
       try {
         const params = new URLSearchParams();
@@ -27,17 +26,11 @@ function MovieList({ searchKeyword }) {
         params.append('sortBy', sortBy);
         params.append('sortOrder', sortOrder);
         
-        const apiUrl = `http://localhost:8000/api/movies?${params.toString()}`;
-        
-        // console.log("Frontend: Calling API URL:", apiUrl); 
-        
+        const apiUrl = `http://localhost:8000/api/movies?${params.toString()}`;        
         const response = await axios.get(apiUrl);
-        // console.log("Frontend: API Response Status:", response.status);
-        // console.log("Frontend: API Response Data (first 5 movies):", response.data.slice(0,5)); 
-        
         setMovies(response.data);
+
       } catch (err) {
-        // console.error('Frontend: Error fetching movies:', err.response || err.message || err);
         setError('Failed to load movie list. Please check connection or search term.');
       } finally {
         setLoading(false);
@@ -48,12 +41,10 @@ function MovieList({ searchKeyword }) {
   }, [searchKeyword, sortBy, sortOrder]); 
 
   const handleSortByChange = (event) => {
-    // console.log("Frontend: SortBy changed to:", event.target.value);
     setSortBy(event.target.value);
   };
 
   const handleSortOrderChange = (event) => {
-    // console.log("Frontend: SortOrder changed to:", event.target.value);
     setSortOrder(event.target.value);
   };
 
@@ -69,19 +60,18 @@ function MovieList({ searchKeyword }) {
     <div className="movie-list-container">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
         <h2>Movie List</h2>
-        {/* Điều khiển sắp xếp sử dụng className từ MovieList.css */}
-        <div className="sorting-controls sorting-controls-container"> {/* Áp dụng class cho container */}
+        <div className="sorting-controls sorting-controls-container">
           <div>
-            <label htmlFor="sort-by" className="sort-label">Sort By: </label> {/* Áp dụng class cho label */}
-            <select id="sort-by" value={sortBy} onChange={handleSortByChange} className="sort-select"> {/* Áp dụng class cho select */}
+            <label htmlFor="sort-by" className="sort-label">Sort By: </label>
+            <select id="sort-by" value={sortBy} onChange={handleSortByChange} className="sort-select">
               <option value="releaseDate">Release Date</option>
               <option value="title">Title</option>
               <option value="averageRating">Rating</option>
             </select>
           </div>
           <div>
-            <label htmlFor="sort-order" className="sort-label">Order: </label> {/* Áp dụng class cho label */}
-            <select id="sort-order" value={sortOrder} onChange={handleSortOrderChange} className="sort-select"> {/* Áp dụng class cho select */}
+            <label htmlFor="sort-order" className="sort-label">Order: </label>
+            <select id="sort-order" value={sortOrder} onChange={handleSortOrderChange} className="sort-select">
               <option value="desc">Descending</option>
               <option value="asc">Ascending</option>
             </select>

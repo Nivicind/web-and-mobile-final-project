@@ -9,20 +9,19 @@ const ContactPage = () => {
     });
     const [sending, setSending] = useState(false);
     const [error, setError] = useState('');
-    const [successMessage, setSuccessMessage] = useState(''); // New state for success message
+    const [successMessage, setSuccessMessage] = useState('');
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
-        setError(''); // Clear error when user starts typing
-        setSuccessMessage(''); // Clear success message when user starts typing
+        setError('');
+        setSuccessMessage('');
     };
 
 const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(''); // Clear previous errors
-    setSuccessMessage(''); // Clear previous success messages
+    setError('');
+    setSuccessMessage('');
 
-    // Trim the values before validation and sending
     const trimmedName = form.name.trim();
     const trimmedEmail = form.email.trim();
     const trimmedMessage = form.message.trim();
@@ -46,8 +45,8 @@ const handleSubmit = async (e) => {
             const data = await res.json();
             setError(data.message || 'Failed to send contact. Please try again.');
         } else {
-            setForm({ name: '', email: '', message: '' }); // Reset form
-            setSuccessMessage('Your message has been sent successfully!'); // Set success message
+            setForm({ name: '', email: '', message: '' });
+            setSuccessMessage('Your message has been sent successfully!');
         }
     } catch (err) {
         console.error("Contact form submission error:", err);
@@ -137,7 +136,7 @@ const handleSubmit = async (e) => {
                     textAlign: 'center',
                     fontWeight: 500
                 }}>{error}</div>}
-                {successMessage && <div style={{ // Display success message
+                {successMessage && <div style={{
                     color: '#28a745',
                     marginBottom: 16,
                     textAlign: 'center',

@@ -5,9 +5,9 @@ import { useAuth } from '../context/AuthContext';
 import '../App.css';
 
 function MovieDetailPage() {
-  const { id } = useParams(); // id này là movieId
+  const { id } = useParams();
   const { isAuthenticated, token, user, isAdmin } = useAuth();
-  const navigate = useNavigate(); // Sử dụng hook useNavigate
+  const navigate = useNavigate();
 
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -90,7 +90,7 @@ function MovieDetailPage() {
       setCommentError('Comment cannot be empty.');
       return;
     }
-    setCommentLoading(true); // Bắt đầu loading
+    setCommentLoading(true);
     try {
       await axios.post(
         'http://localhost:8000/api/comments',
@@ -98,12 +98,12 @@ function MovieDetailPage() {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setNewComment('');
-      fetchComments(); // Tải lại comment
+      fetchComments();
     } catch (err) {
       setCommentError(err.response?.data?.message || 'Failed to add comment. Please login.');
       console.error('Error adding comment:', err);
     } finally {
-      setCommentLoading(false); // Kết thúc loading
+      setCommentLoading(false);
     }
   };
 
@@ -126,9 +126,8 @@ function MovieDetailPage() {
             { headers: { Authorization: `Bearer ${token}` } }
         );
         setRatingSuccess('Rating submitted successfully!');
-        // setUserRating(ratingValue); // Sẽ được cập nhật bởi fetchUserRating
-        fetchMovie(); // Tải lại thông tin phim (averageRating)
-        fetchUserRating(); // Tải lại rating của user
+        fetchMovie();
+        fetchUserRating();
     } catch (err) {
       setRatingError(err.response?.data?.message || 'Failed to submit rating.');
       console.error('Error submitting rating:', err);
@@ -146,7 +145,7 @@ function MovieDetailPage() {
         `http://localhost:8000/api/comments/${commentId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      fetchComments(); // Tải lại comments
+      fetchComments();
     } catch (err) {
       setCommentError(err.response?.data?.message || 'Failed to delete comment.');
       console.error('Error deleting comment:', err);
@@ -166,10 +165,8 @@ function MovieDetailPage() {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setRatingSuccess('Your rating has been deleted successfully!');
-      // setUserRating(0); // Sẽ được cập nhật bởi fetchUserRating
-      // setUserRatingId(null); 
-      fetchMovie(); // Tải lại thông tin phim (averageRating)
-      fetchUserRating(); // Tải lại rating của user
+      fetchMovie();
+      fetchUserRating();
     } catch (err) {
       setRatingError(err.response?.data?.message || 'Failed to delete rating.');
       console.error('Error deleting rating:', err);
@@ -178,9 +175,8 @@ function MovieDetailPage() {
     }
   };
 
-  // HÀM ĐỂ ĐIỀU HƯỚNG SANG TRANG UPDATE
   const handleUpdateMovieClick = () => {
-    navigate(`/update-movie/${id}`); // Điều hướng với movieId
+    navigate(`/update-movie/${id}`);
   };
 
 
@@ -196,14 +192,12 @@ function MovieDetailPage() {
 
   return (
     <div className="container movie-detail-page">
-      {/* NÚT UPDATE MOVIE CHO ADMIN */}
       {isAuthenticated && isAdmin && (
         <div style={{ marginBottom: '20px', textAlign: 'right' }}>
           <button 
             onClick={handleUpdateMovieClick} 
-            className="nav-button" // Hoặc một class khác phù hợp
-            style={{backgroundColor: '#007bff', padding: '10px 15px'}} // Style lại cho giống nút "Search"
-          >
+            className="nav-button"
+            style={{backgroundColor: '#007bff', padding: '10px 15px'}}>
             Update This Movie
           </button>
         </div>
@@ -230,7 +224,6 @@ function MovieDetailPage() {
       </div>
 
       <div className="ratings-section">
-        {/* ... (Phần rating không đổi) ... */}
         <h3>Ratings</h3>
         <p>Average Rating: {movie.averageRating ? `${parseFloat(movie.averageRating).toFixed(1)}/5` : 'N/A'} ({movie.numberOfRatings || 0} ratings)</p>
 
@@ -266,7 +259,6 @@ function MovieDetailPage() {
       </div>
 
       <div className="comments-section">
-        {/* ... (Phần comments không đổi) ... */}
         <h3>Comments</h3>
         {commentLoading && <p>Loading comments...</p>}
         {commentError && <p className="error-message">{commentError}</p>}

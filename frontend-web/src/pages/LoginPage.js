@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom'; // Import Link
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import '../App.css';
 
@@ -65,7 +65,6 @@ function LoginPage() {
         </div>
         <button type="submit">Login</button>
       </form>
-      {/* Thêm liên kết đến trang đăng ký ở đây */}
       <p style={{ marginTop: '20px', color: '#ccc' }}>
         Don't have an account? <Link to="/register" style={{ color: '#007bff', textDecoration: 'none' }}>Sign Up</Link>
       </p>
