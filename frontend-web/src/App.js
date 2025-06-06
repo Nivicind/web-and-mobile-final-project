@@ -73,11 +73,6 @@ function App() {
               {!isAuthenticated && (
                 <>
                   <li>
-                    <Link to="/contact" style={{ color: '#28a745', textDecoration: 'underline', marginRight: 10 }}>
-                      Contact
-                    </Link>
-                  </li>
-                  <li>
                     <Link to="/login" className="login-signup-button">Login/Sign up</Link>
                   </li>
                 </>
@@ -89,6 +84,11 @@ function App() {
                   )}
                   <li><span style={{ color: '#ccc', cursor: 'default' }}>Welcome, {user.name}</span></li>
                   <li><button onClick={handleLogout} className="nav-button">Logout</button></li>
+                                    <li>
+                    <Link to="/contact" style={{ color: '#28a745', textDecoration: 'underline', marginRight: 10 }}>
+                      Contact
+                    </Link>
+                  </li>
                 </>
               )}
             </ul>

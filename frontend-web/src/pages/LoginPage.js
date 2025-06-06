@@ -26,7 +26,7 @@ function LoginPage() {
       
       setTimeout(() => {
         navigate('/');
-      }, 2000);
+      });
 
     } catch (err) {
       console.error('Login error detailed:', err);
